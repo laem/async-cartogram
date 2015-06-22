@@ -36,6 +36,6 @@ var promiseOfGeometries = AsyncCartogram(
 See the [example](https://github.com/laem/async-cartogram/tree/master/example) app (cartogram of Paris) for detailed usage.
 
 
-![L'escargot déformé](https://github.com/laem/async-cartogram/tree/master/example/capture.png)
+![L'escargot](https://raw.githubusercontent.com/laem/async-cartogram/master/example/capture.png)
 
 Check the project for which this lib was created, [a 90-years cartogram of europe](https://github.com/laem/eurpop).
