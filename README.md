@@ -19,15 +19,16 @@ The library is compiled in `dist/` as [UMD](https://github.com/umdjs/umd), and h
 var promiseOfGeometries = AsyncCartogram(
   {
     topology: topojsonData,
-    // the geometries of the GeometryCollection object to reshape :
+    // geometries to reshape:
     geometries: topojsonData.objects.OBJECTNAME.geometries,
     projection: {
       name: 'mercator',
       translation: [X,Y],
-      scaling: scaling
+      scaling: scalingFactor, //e.g. 2000
+      center: [long, lat]
     }
   },
-  values, // { taskId => { geoJsonFeatureValue => area wanted} }
+  values, // { taskId => { geoJsonFeatureValue => newArea} }
   featureProperty // geoJsonFeatureIdKey to link geojson features to values
 );
 ```
