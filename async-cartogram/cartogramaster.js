@@ -70,7 +70,6 @@ function cartogramaster(geo, values, featureProperty) {
 
   var workers = [],
   results = {};
-  debugger;
 
   function post(worker, index){
     worker.postMessage({

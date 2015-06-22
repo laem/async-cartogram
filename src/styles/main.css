@@ -2,6 +2,8 @@
 
 html, body {
   background: #fff;
+  font-family: 'Fira Sans';
+  font-weight: 300;
 }
 
 /* main */
@@ -38,19 +40,36 @@ line {
   opacity: 0.1
 }
 
+svg text {
+  fill: white;
+  font-weight: 500;
+  stroke: #1ABC9C;
+  stroke-width: 0.8px
+}
+
 /* Menu */
 
 ul#menu {
   list-style-type: none;
+  width: 80%;
+  margin-left: 50%;
+  transform: translateX(-50%);
 }
 
 #menu li {
-  float: left;
-  margin-left: 3%;
+  display: inline;
+  margin-right: 5%;
   padding: 8px;
   font-size: 24px;
-  color: white;
   line-height: 24px;
+  cursor: pointer;
+  border: 1px solid white;
+  color: #1ABC9C;
+  background: white;
+  border: 1px solid #1ABC9C;
+}
+
+#menu li:hover {
+  color: white;
   background: #1ABC9C;
-  cursor: pointer
 }
