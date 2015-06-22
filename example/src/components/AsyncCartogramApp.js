@@ -8,9 +8,8 @@ require('../styles/main.css');
 
 require('d3')
 var topojson = require('topojson')
-var asyncCartogram = require('../../async-cartogram/cartogramaster.js')
+var AsyncCartogram = require('../../../dist/async-cartogram.js')
 var topojsonData = require('json!../../data/arrondissements.json')
-var _ = require('underscore.deferred')
 
 var parisData = require('dsv!../../data/metriques-paris.csv')
 // Transform this raw csv for the cartogram input
@@ -59,7 +58,7 @@ var AsyncCartogramApp = React.createClass({
 
     // compute the cartogram geometries for each metric, then cache them.
 
-    var promiseOfGeos = asyncCartogram({
+    var promiseOfGeos = AsyncCartogram({
         topology: topojsonData,
         geometries: topojsonData.objects.arrondissements.geometries,
         projection: {

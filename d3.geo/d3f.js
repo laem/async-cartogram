@@ -2413,5 +2413,5 @@ function d3f_geo_mercatorProjection(project) {
 }).raw = d3f_geo_mercator;
   if (typeof define === "function" && define.amd) define(d3f);
   else if (typeof module === "object" && module.exports) module.exports = d3f;
-  //this.d3f = d3f;
+  this.d3f = d3f;
 }();

@@ -47,14 +47,13 @@
  */
 
 function spawnWorker(){
-  var Worker
+  var Wok
   if (typeof window !== 'undefined'){//browser
-    Worker = require("worker!./cartogram-worker.js");
-    return new Worker
+    Wok = require('worker?inline=true!./cartogram-worker.js');
   } else {//node
-    Worker = require('./cartogram-worker.js')
-    return new Worker()
+    Wok = require('./cartogram-worker.js')
   }
+  return new Wok()
 }
 
 

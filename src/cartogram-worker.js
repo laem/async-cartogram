@@ -1,5 +1,5 @@
 //Use a partial d3 build, that doesn't need the DOM.
-var d3f = require('./d3.geo/d3f.js')
+var d3f = require('../d3.geo/d3f.js')
 var Helpers = require('./cartogram-helpers')
 
 
