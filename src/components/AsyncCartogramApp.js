@@ -1,13 +1,19 @@
 var React = require('react/addons');
 var ReactTransitionGroup = React.addons.TransitionGroup;
 
+
+// CSS
+require('normalize.css');
+require('../styles/main.css');
+
 require('d3')
 var topojson = require('topojson')
 var asyncCartogram = require('../../async-cartogram/cartogramaster.js')
 var topojsonData = require('json!../../data/arrondissements.json')
 var _ = require('underscore.deferred')
-var parisData = require('dsv!../../data/metriques-paris.csv')
 
+var parisData = require('dsv!../../data/metriques-paris.csv')
+// Transform this raw csv for the cartogram input
 var metrics = Object.keys(parisData[0])
 metrics.shift()
 var data = {}
@@ -17,19 +23,14 @@ metrics.map(function(metric){
     data[metric][line['Code géographique']] = +line[metric].replace(/,/g, '.')
   })
 })
-
-// CSS
-require('normalize.css');
-require('../styles/main.css');
+// end transform
 
 //Some vars for our d3 svg map
 var scaling = 200000, center = [2.2940220935081865, 48.874100811293694]
 
 var AsyncCartogramApp = React.createClass({
   getInitialState: function(){
-    return {
-      metric: null
-    }
+    return {metric: null}
   },
   render: function() {
     return (
@@ -53,9 +54,10 @@ var AsyncCartogramApp = React.createClass({
   componentDidUpdate: function(){
     this.displayMap()
   },
+
   componentDidMount: function(){ var _this = this;
 
-    // compute the cartogram geometries for each metrics, then cache them.
+    // compute the cartogram geometries for each metric, then cache them.
 
     var promiseOfGeos = asyncCartogram({
         topology: topojsonData,
@@ -77,6 +79,7 @@ var AsyncCartogramApp = React.createClass({
 
     // All is done
     promiseOfGeos.then(function(a){
+      //cache the results
       _this.computedCartograms = a
       _this.displayMap()
     }).fail(function( err ){
@@ -89,13 +92,11 @@ var AsyncCartogramApp = React.createClass({
     playground.innerHTML = ''
     var svg = d3.select(playground).append("svg").attr("id", "leSVG")
     var path, featureCollection;
-    if (this.state.metric == null){// Show the real geographical map
+    if (this.state.metric == null){// Show the real map
 
       var projection = d3.geo.mercator()
       .center(center)
       .scale(scaling)
-
-      //var centerPoint = projection([2.2940220935081865, 48.874100811293694])
 
       path = d3.geo.path().projection(projection)
       //convert to geojson
@@ -113,6 +114,7 @@ var AsyncCartogramApp = React.createClass({
 
     var nodes = []
 
+    //computing the area centroids from their geometry
     featureCollection.features.forEach((d, i) => {
       var centroid = path.centroid(d);
       if (centroid.some(isNaN)) {
@@ -124,19 +126,24 @@ var AsyncCartogramApp = React.createClass({
       nodes.push(centroid);
     });
 
-    var nodes = svg.append('g').attr('class', 'nodes').selectAll("g")
+    //adding the map areas
+    var areas = svg.append('g').attr('class', 'nodes').selectAll("g")
       .data(nodes)
       .enter().append("g")
-    nodes
+    areas
       .append("path")
       .attr("d", function(d) { return path(d.feature); })
 
-    nodes
+
+    //let's add names to our map areas
+    areas
       .append("text")
       .attr("x", d => d.x)
       .attr("y", d => d.y)
       .text(d => d.feature.properties.c_ar)
-    nodes.each(function(d){
+
+    //let's add la Tour Eiffel
+    areas.each(function(d){
       if (d.feature.properties.c_ar == 7){
         d3.select(this)
             .append("image")
