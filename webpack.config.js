@@ -1,3 +1,5 @@
+var webpack = require('webpack');
+
 module.exports = {
   entry: "./src/cartogramaster.js",
   output: {
@@ -6,7 +8,7 @@ module.exports = {
     libraryTarget: 'umd',
     library: "AsyncCartogram"
   },
-  /*
+
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -14,5 +16,5 @@ module.exports = {
       }
     })
   ]
-  */
+
 };
