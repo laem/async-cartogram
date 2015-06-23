@@ -42,6 +42,7 @@ var AsyncCartogramApp = React.createClass({
                  </li>
         })}</ul>
         <div id="playground">A map will replace me --------> :-o </div>
+        <div id="disclaimer">This is just a demo of <a target="_blank" href="https://github.com/laem/async-cartogram">async-cartogram</a> applied to Paris for three metrics</div>
       </div>
     );
   },

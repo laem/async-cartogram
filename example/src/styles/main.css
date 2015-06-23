@@ -17,7 +17,7 @@ html, body {
 
 #playground {
   width: 80%;
-  height: 800px;
+  height: 600px;
   margin-left: 10%
 }
 
@@ -70,4 +70,18 @@ ul#menu {
 #menu li:hover {
   color: white;
   background: #1ABC9C;
+}
+
+#disclaimer {
+  position: absolute;
+  bottom: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#disclaimer a {
+  background: #34495e;
+  color:white;
+  text-decoration: none;
+  padding: 0 2px 0 2px
 }
